@@ -5,8 +5,8 @@ boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
 boton Reset, Linea;
 
 void iniciarBotones(){
-  Reset = new boton(width/2, height/2, 100, 60, color(250,0,0), color(0,255,0));
-  Linea = new boton(width/2, height/4, 100, 60, color(150,200,30), color(50,244,100));
+  Reset = new boton(width/2, height/2, 100, 60, color(250,0,0), color(0,255,0), "RESET");
+  Linea = new boton(width/2, height/4, 100, 60, color(150,200,30), color(50,244,100), "LINEA");
 }
 
 //----------------------CLASE----------------------//
@@ -18,20 +18,21 @@ class boton{
   color Color2;  //Color del botón cuando está seleccionado
   boolean prsd = false;  //Presionado o no
   boolean mslc = false;  //Mouse sobre el botón o no
-  
-  boton(int _x, int _y, int _ancho, int _alto, color _Color1, color _Color2){
+  String info;
+  boton(int _x, int _y, int _ancho, int _alto, color _Color1, color _Color2, String _info){
     x = _x;
     y = _y;
     ancho = _ancho;
     alto = _alto;
     Color1 = _Color1;
     Color2 = _Color2;
+    info = _info;
   }
   
   void checarMouse(){
     if(mouseX > x && mouseX < x + ancho && mouseY > y && mouseY < y + alto){  //Si el puntero está sobre el botón
       mslc = true;
-      if(mousePressed){
+      if(izqClick()){
         prsd = !prsd;
       }
     }else{

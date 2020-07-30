@@ -22,3 +22,19 @@ void draw(){
   Reset.dibujar();
   Linea.dibujar();
 }
+
+//----------------------CONTROL CLICK----------------------//
+
+boolean izqClick = false;
+
+boolean izqClick(){
+  if(mousePressed && mouseButton == LEFT){
+    if(izqClick == false){
+      izqClick = true;
+      return true;
+    }
+  }else{
+    izqClick = false;
+  }
+  return false;
+}
