@@ -1,0 +1,3 @@
+# Ecualizador musical
+
+Working :)
