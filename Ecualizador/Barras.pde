@@ -1,7 +1,3 @@
-/*
-
-
-*/
 
 //----------------------GENERACIÖN DE LAS BARRAS----------------------//
 
@@ -9,8 +5,8 @@ int numBarras = 15;
 barra [] Barras = new barra[numBarras];
 
 //Cordenada inferior izquierda donde se dibuja la gráfica 
-int xGrafica;
-int yGrafica = height - (height/6);
+int xGrafica = 100;
+int yGrafica = 300;
 
 void iniciarBarras(){
   int _x;  //Posición inferior izquierda de la barra
@@ -36,9 +32,10 @@ class barra{
     ancho = _a;
   }
   
-  
-  void display(){
-    rect(x, y, -alto, ancho);
+  void dibujar(){
+    noStroke();
+    fill(bColor);
+    rect(x, y, ancho, -alto);
     
   }
   
