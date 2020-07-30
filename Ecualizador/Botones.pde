@@ -5,8 +5,9 @@ boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
 boton Reset, Linea;
 
 void iniciarBotones(){
-  Reset = new boton(width/2, height/2, 100, 60, color(250,0,0), color(0,255,0), "RESET");
-  Linea = new boton(width/2, height/4, 100, 60, color(150,200,30), color(50,244,100), "LINEA");
+  int xBotones = xGrafica + (numBarras + 1)*30;  //30 separación de las barras
+  Reset = new boton(xBotones, height/2, 80, 50, color(250,0,0), color(0,255,0), "RESET");
+  Linea = new boton(xBotones, height/4, 80, 50, color(150,200,30), color(50,244,100), "LINEA");
 }
 
 //----------------------CLASE----------------------//
@@ -32,8 +33,9 @@ class boton{
   void checarMouse(){
     if(mouseX > x && mouseX < x + ancho && mouseY > y && mouseY < y + alto){  //Si el puntero está sobre el botón
       mslc = true;
-      if(izqClick()){
+      if(izqClick1){
         prsd = !prsd;
+        izqClick1 = false;
       }
     }else{
       mslc = false;
@@ -54,7 +56,8 @@ class boton{
       fill(Color1);
     }
     rect(x, y, ancho, alto);
-    fill(255);
+    fill(0);
+    textSize(20);
     textAlign(CENTER,CENTER);
     text(info, x + ancho/2, y + alto/2);
   }

@@ -5,7 +5,7 @@
 */
 
 void setup(){
-  size(700,500);
+  size(700,300);
   iniciarBarras();
   iniciarBotones();
 }
@@ -13,12 +13,12 @@ void setup(){
 void draw(){
   background(150);
   
-  pushMatrix();
-  translate(xGrafica, yGrafica);
+  //Dibujar Gráfica
   for(int b = 0; b < numBarras; b++){
     Barras[b].dibujar();
   }
-  popMatrix();
+  
+  //Dibujar Botones
   Reset.dibujar();
   Linea.dibujar();
 }
@@ -26,15 +26,16 @@ void draw(){
 //----------------------CONTROL CLICK----------------------//
 
 boolean izqClick = false;
+boolean izqClick1 = false;
 
-boolean izqClick(){
-  if(mousePressed && mouseButton == LEFT){
-    if(izqClick == false){
-      izqClick = true;
-      return true;
+void mousePressed(){
+ if(mouseButton == LEFT){
+    if(izqClick1 == false){
+      izqClick1 = true;
     }
+    izqClick = true;
   }else{
     izqClick = false;
+    izqClick1 = false;
   }
-  return false;
 }

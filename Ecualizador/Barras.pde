@@ -9,17 +9,16 @@ int xGrafica;
 int yGrafica;
 
 void iniciarBarras(){
-  xGrafica = width/10;
+  xGrafica = width/15;
   yGrafica = height - height/10;
   
   int _x;  //Posición inferior izquierda de la barra
-  int _y = 0;  //Posición inferior de la barra
   int _dxBarras = 30;  //Separación entre barras
   int _a = 21;  //Ancho de las barras
   
   for(int b = 0; b < numBarras; b++){
     _x = b*_dxBarras;
-    Barras[b] = new barra(_x, _y, _a);
+    Barras[b] = new barra(xGrafica + _x, yGrafica, _a);
   }
 }
 
@@ -36,11 +35,27 @@ class barra{
     ancho = _a;
   }
   
+  boolean checarMouse(){
+    if(mouseX > x  && mouseX < x + ancho && mouseY > y - alto && mouseY < y){  //Si el puntero está sobre la barra
+      if(mousePressed && mouseButton == LEFT){
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  void cambiarAltura(){
+    alto = mouseY;
+    println("CAMBIAR ALTURA");
+  }
+  
   void dibujar(){
+    if(checarMouse()){
+      cambiarAltura();
+    }
     noStroke();
     fill(bColor);
     rect(x, y, ancho, -alto);
-    
   }
   
 }
