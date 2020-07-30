@@ -5,14 +5,18 @@ int numBarras = 15;
 barra [] Barras = new barra[numBarras];
 
 //Cordenada inferior izquierda donde se dibuja la gráfica 
-int xGrafica = 100;
-int yGrafica = 300;
+int xGrafica;
+int yGrafica;
 
 void iniciarBarras(){
+  xGrafica = width/10;
+  yGrafica = height - height/10;
+  
   int _x;  //Posición inferior izquierda de la barra
   int _y = 0;  //Posición inferior de la barra
   int _dxBarras = 30;  //Separación entre barras
-  int _a = 20;  //Ancho de las barras
+  int _a = 21;  //Ancho de las barras
+  
   for(int b = 0; b < numBarras; b++){
     _x = b*_dxBarras;
     Barras[b] = new barra(_x, _y, _a);
@@ -22,7 +26,7 @@ void iniciarBarras(){
 //----------------------CLASE----------------------//
 class barra{
   int x, y;
-  int alto = 50;
+  int alto = 100;
   int ancho;
   color bColor = color(106,224,11);
   

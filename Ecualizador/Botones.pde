@@ -54,5 +54,8 @@ class boton{
       fill(Color1);
     }
     rect(x, y, ancho, alto);
+    fill(255);
+    textAlign(CENTER,CENTER);
+    text(info, x + ancho/2, y + alto/2);
   }
 }
