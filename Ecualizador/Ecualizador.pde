@@ -4,10 +4,12 @@
 
 */
 
+String nombreApp = "ECUALIZADOR";
 PFont Font;
 
 void setup(){
   size(600,300);
+  surface.setTitle(nombreApp);  //Nombre de la ventana
   
   Font = createFont("Bebas-Regular.ttf", 32);
   textFont(Font);
@@ -21,7 +23,7 @@ void draw(){
   fill(255);
   textAlign(CENTER,CENTER);
   textSize(20);
-  text("ECUALIZADOR", width/2, height/12);
+  text(nombreApp, width/2, height/12);
   
   //Dibujar Gráfica
   dibujarEje();
@@ -29,9 +31,8 @@ void draw(){
     Barras[b].dibujar();
   }
   
-  //Dibujar Botones
-  Reset.dibujar();
-  Linea.dibujar();
+  //Botones
+  dibujarBotones();
   accionBotones();
 }
 

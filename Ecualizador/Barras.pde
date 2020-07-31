@@ -9,18 +9,18 @@ int xGrafica;
 int yGrafica;
 
 int altoMaxBarras;
+int dxBarras = 30;  //Separación entre barras
+int anchoBarras = 21;  //Ancho de las barras
 
 void iniciarBarras(){
   xGrafica = width/15;
   yGrafica = height - height/10;
   altoMaxBarras = yGrafica - height/5;
   int _x;  //Posición inferior izquierda de la barra
-  int _dxBarras = 30;  //Separación entre barras
-  int _a = 21;  //Ancho de las barras
   
   for(int b = 0; b < numBarras; b++){
-    _x = b*_dxBarras;
-    Barras[b] = new barra(xGrafica + _x, yGrafica, _a);
+    _x = b*dxBarras;
+    Barras[b] = new barra(xGrafica + _x, yGrafica, anchoBarras);
     Barras[b].reset();
   }
 }
@@ -35,7 +35,8 @@ void dibujarEje(){
   textAlign(RIGHT,CENTER);
   
   //Eje
-  line(xGrafica -10, yGrafica, xGrafica -10, yGrafica - altoMaxBarras);  //Linea del eje  
+  line(xGrafica -10, yGrafica, xGrafica -10, yGrafica - altoMaxBarras);  //Linea del ejeY
+  line(xGrafica -10, yGrafica, xGrafica + numBarras*dxBarras, yGrafica);  //Linea del ejeX 
   int divisiones = 4;  //Cantidad de divisiones del eje  (*Tiene que ser un número mayor que cero)
   
   //Numeros del eje
@@ -79,13 +80,15 @@ class barra{
     }
     noStroke();
     fill(Color1);
-    rect(x, y, ancho, -alto);
-    if(!Linea.prsd){  //Se muestra el número solo cuando no se muestra la linea
+    if(!Puntos.prsd){  //Se muestra el número solo cuando no se muestra la linea
+      rect(x, y, ancho, -alto);
       fill(255);
       textSize(12);
       textAlign(CENTER,CENTER);
       num = round(map(alto, 0, altoMaxBarras, 0, 100));
       text(num, x + ancho/2, y - alto - 10);
+    }else{  //Si está activado el botón muestra un círculo a la misma altura de la barra
+      circle(x + ancho/2, y - alto, 13);
     }
   }
   
