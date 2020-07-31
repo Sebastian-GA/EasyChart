@@ -7,7 +7,7 @@ boton Reset, Puntos, Linea;
 void iniciarBotones(){
   int xBotones = xGrafica + numBarras*dxBarras + 10;
   Puntos = new boton(xBotones, height/2 - 40, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
-  Linea = new boton(xBotones, height/2, 60, 30, color(192, 0, 116), color(0, 172, 232), "Recta", "Curva");
+  Linea = new boton(xBotones, height/2, 60, 30, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
   Reset = new boton(xBotones, height/2 + 40, 60, 30, color(245, 102, 0), "Reset");
 }
 
