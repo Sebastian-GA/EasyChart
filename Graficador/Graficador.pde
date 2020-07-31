@@ -4,7 +4,8 @@
 
 */
 
-String Titulo = "Ingresos Mensuales";
+String Titulo1 = "Ingresos";
+String Titulo2 = "Anuales";
 
 void setup(){
   size(700,400);
@@ -21,7 +22,7 @@ void draw(){
   fill(255);
   textAlign(CENTER,CENTER);
   textSize(20);
-  text(Titulo, width/2, height/12);
+  text(Titulo1+" "+Titulo2, width/2, height/12);
   
   //Dibujar Gráfica
   dibujarEje();
@@ -34,6 +35,7 @@ void draw(){
   accionBotones();
 }
 
+
 //----------------------CONTROL CLICK----------------------//
 
 void mousePressed(){
@@ -43,7 +45,9 @@ void mousePressed(){
    else if(PuntosMenos.checarMouse())  PuntosMenos.cambiarEstado();
    else if(Linea.checarMouse())  Linea.cambiarEstado();
    else if(Reset.checarMouse())  Reset.cambiarEstado();
+   else if(Tipo.checarMouse())  Tipo.cambiarEstado();
    else if(EjeX.checarMouse())  EjeX.cambiarEstado();
    else if(EjeY.checarMouse())  EjeY.cambiarEstado();
+   else if(Tema.checarMouse())  Tema.cambiarEstado();
  }
 }

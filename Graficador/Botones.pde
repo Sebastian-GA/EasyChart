@@ -4,27 +4,57 @@
 boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
 boton Reset, Puntos, PuntosMas, PuntosMenos, Linea;
 boton Tema;
-boton EjeX, EjeY;
+boton Tipo, EjeX, EjeY;
+
 int xBotones;
+int dyBotones = 42;  //Separacion en Y de los botones
+int anchoBotones = 60;
+int altoBotones = 30;
 
 void iniciarBotones(){
   xBotones = width - 90;
   
-  Puntos = new boton(xBotones, height/2 - 160, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
-  PuntosMas = new boton(xBotones, height/2 - 120, 30, 30, color(192, 0, 116), "+");
-  PuntosMenos = new boton(xBotones + 30, height/2 - 120, 30, 30, color(192, 0, 116), "-");
+  Puntos = new boton(xBotones, height/2 - 4*dyBotones, anchoBotones, altoBotones, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
+  
+  PuntosMas = new boton(xBotones, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, color(192, 0, 116), "+");
+  PuntosMenos = new boton(xBotones + 30, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, color(192, 0, 116), "-");
   PuntosMas.txtSize = 20;//Para que los signos se vean más grandes
   PuntosMas.Color2 = color(0, 172, 232);  //Para que cuando se alcance el límite queden de un color distinto
   PuntosMenos.txtSize = 20;
   PuntosMenos.Color2 = color(0, 172, 232);
   
-  Linea = new boton(xBotones, height/2 - 80, 60, 30, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
-  Reset = new boton(xBotones, height/2 - 40, 60, 30, color(245, 102, 0), "Reset");
+  Linea = new boton(xBotones, height/2 - 2*dyBotones, anchoBotones, altoBotones, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
+  Reset = new boton(xBotones, height/2 - dyBotones, anchoBotones, altoBotones, color(245, 102, 0), "Reset");
   
-  Tema = new boton(xBotones, height/2, 60, 30, color(192, 0, 116), color(0, 172, 232), "Tema1", "tema2");
+  Tipo = new boton(xBotones, height/2, anchoBotones, altoBotones, color(0, 157, 73), "Ingresos");  //Costos, Gastos
+  EjeY = new boton(xBotones, height/2 + dyBotones, anchoBotones, altoBotones, color(0, 157, 73), "EjeY");
+  EjeX = new boton(xBotones, height/2 + 2*dyBotones, anchoBotones, altoBotones, color(0, 157, 73), color(0, 157, 73), "Años", "Meses");
   
-  EjeY = new boton(xBotones, height/2 + 40, 60, 30, color(0, 157, 73), "EjeY");
-  EjeX = new boton(xBotones, height/2 + 80, 60, 30, color(0, 157, 73), color(0, 157, 73), "Años", "Meses");
+  Tema = new boton(xBotones, height/2 + 3*dyBotones, anchoBotones, altoBotones, color(192, 0, 116), color(0, 172, 232), "Tema 1", "Tema 2");
+}
+
+//----------------------DIBUJAR LOS BOTONES----------------------//
+
+void dibujarBotones(){
+  stroke(255);
+  strokeWeight(1);
+  noFill();
+  rect(xBotones -4, Puntos.y -4, anchoBotones +8, 3*dyBotones + altoBotones +8);  //Rectángulo que encierra la categoría del control de los puntos, barras, linea...
+  Puntos.dibujar();
+  PuntosMas.dibujar();
+  PuntosMenos.dibujar();
+  Linea.dibujar();
+  Reset.dibujar();
+  
+  stroke(255);
+  strokeWeight(1);
+  noFill();
+  rect(xBotones -4, Tipo.y -4, anchoBotones +8, 2*dyBotones + altoBotones + 8);  //Rectángulo que encierra la categoría del control de los puntos, barras, linea...
+  Tipo.dibujar();
+  EjeY.dibujar();
+  EjeX.dibujar();
+  
+  Tema.dibujar();
 }
 
 //----------------------CLASE----------------------//
@@ -82,7 +112,7 @@ class boton{
   void dibujar(){
     checarMouse();
     
-    if(mslc)  strokeWeight(4);  //Si el mouse está sobre el botón
+    if(mslc && !valMax)  strokeWeight(4);  //Si el mouse está sobre el botón y no esta el valor máximo
     else  strokeWeight(1);
     
     if((prsd && cambiaColor) || valMax){  //Si el botón cambia de color y está activado se dibuja de Color2
@@ -102,24 +132,6 @@ class boton{
       text(info1, x + ancho/2, y + alto/2);
     }
   }
-}
-
-//----------------------DIBUJAR LOS BOTONES----------------------//
-
-void dibujarBotones(){
-  stroke(255);
-  strokeWeight(1);
-  noFill();
-  rect(Puntos.x -5, Puntos.y -5, Puntos.ancho +10, Linea.y + Linea.alto +10);
-  Puntos.dibujar();
-  PuntosMas.dibujar();
-  PuntosMenos.dibujar();
-  Linea.dibujar();
-  Reset.dibujar();
-  
-  Tema.dibujar();
-  EjeY.dibujar();
-  EjeX.dibujar();
 }
 
 //----------------------ACCIÓN DE LOS BOTONES----------------------//
@@ -174,13 +186,33 @@ void accionBotones(){
     Reset.prsd = false;
   }
   
+  //----------------------TIPO----------------------//
+  
+  if(Tipo.prsd){
+    if(Titulo1 == "Ingresos")  Titulo1 = "Costos";
+    else if(Titulo1 == "Costos")  Titulo1 = "Gastos";
+    else if(Titulo1 == "Gastos")  Titulo1 = "Ingresos";
+    Tipo.prsd = false;
+  }
+  
+  //----------------------EJE Y----------------------//
+  
+  if(EjeY.prsd){
+    if(yMax == 100)  yMax = 500;
+    else if(yMax == 1000) yMax = 100;
+    else  yMax += 1000;
+    yMax = constrain(yMax, 0, 1000);
+    
+    EjeY.prsd = false;
+  }
+  
   //----------------------AÑOS-MESES----------------------//
   
   if(EjeX.prsd){  //Años
     for(int b = 0; b < numBarras; b++){
       text(year() - b, Barras[numBarras - b -1].x + Barras[numBarras - b -1].ancho/2, yGrafica + 10);  //La última barra es la del presente año y las anteriores son las de los años anteriores
     }
-    Titulo = "Ingresos Anuales";
+    Titulo2 = "Anuales";
   }if(!EjeX.prsd){  //Meses
     String [] meses = {"EN", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGTO", "SEPT", "OCT", "NOV", "DIC"};
     int mes = month();
@@ -189,18 +221,7 @@ void accionBotones(){
       if(mes < 0)  mes = 11;
       text(meses[mes], Barras[numBarras - b -1].x + Barras[numBarras - b -1].ancho/2, yGrafica + 10);  //La ultima barra es la del mes actual
     }
-    Titulo = "Ingresos Mensuales";
-  }
-  
-  //----------------------EJE Y----------------------//
-  
-  if(EjeY.prsd){
-    if(yMax == 100)  yMax = 500;
-    else if(yMax == 10000) yMax = 100;
-    else  yMax += 1000;
-    yMax = constrain(yMax, 0, 10000);
-    
-    EjeY.prsd = false;
+    Titulo2 = "Mensuales";
   }
   
 }
