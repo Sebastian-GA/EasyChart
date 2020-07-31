@@ -1,8 +1,9 @@
 
 //----------------------GENERACIÖN DE LAS BARRAS----------------------//
 
-int numBarras = 15;
-barra [] Barras = new barra[numBarras];
+int numBarras = 15;  //Como mínimo 1 barra y como máximo pueden ser 20
+int numMaxBarras = 20;  //NO CAMBIAR
+barra [] Barras = new barra[numMaxBarras];  //Se genera el número máximo de barras que pueden haber
 
 //Cordenada inferior izquierda donde se dibuja la gráfica 
 int xGrafica;
@@ -17,12 +18,35 @@ void iniciarBarras(){
   xGrafica = width/12;
   yGrafica = height - height/10;
   altoMaxBarras = yGrafica - height/5;
+  
+  dxBarras = (xBotones - xGrafica)/numBarras;  //*Importante que numBarras no sea cero
+  anchoBarras = dxBarras - 10;
+  
+  int _x;  //Posición inferior izquierda de la barra
+  
+  for(int b = 0; b < numMaxBarras; b++){
+    _x = b*dxBarras;
+    Barras[b] = new barra(xGrafica + _x, yGrafica, anchoBarras);
+    Barras[b].reset();
+  }
+}
+
+//----------------------CAMBIO DEL NUMERO DE BARRAS----------------------//
+
+void cambiarNumBarras(boolean _mas){
+  if(_mas)  numBarras++;
+  else numBarras--;
+  numBarras = constrain(numBarras, 1, 20);
+  
+  dxBarras = (xBotones - xGrafica)/numBarras;  //*Importante que numBarras no sea cero
+  anchoBarras = dxBarras - 10;
+  
   int _x;  //Posición inferior izquierda de la barra
   
   for(int b = 0; b < numBarras; b++){
     _x = b*dxBarras;
-    Barras[b] = new barra(xGrafica + _x, yGrafica, anchoBarras);
-    Barras[b].reset();
+    Barras[b].ancho = anchoBarras;
+    Barras[b].x = xGrafica + _x;
   }
 }
 

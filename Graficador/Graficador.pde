@@ -7,13 +7,13 @@
 String Titulo = "Ingresos Mensuales";
 
 void setup(){
-  size(600,300);
+  size(700,400);
   surface.setTitle("Graficador");  //Nombre de la ventana
   
   textFont(createFont("Bebas-Regular.ttf", 32));
   
-  iniciarBarras();
   iniciarBotones();
+  iniciarBarras();
 }
 
 void draw(){
@@ -36,12 +36,11 @@ void draw(){
 
 //----------------------CONTROL CLICK----------------------//
 
-boolean izqClick = false;
-boolean izqClick1 = false;
-
 void mousePressed(){
  if(mouseButton == LEFT){
    if(Puntos.checarMouse())  Puntos.cambiarEstado();
+   else if(PuntosMas.checarMouse())  PuntosMas.cambiarEstado();
+   else if(PuntosMenos.checarMouse())  PuntosMenos.cambiarEstado();
    else if(Linea.checarMouse())  Linea.cambiarEstado();
    else if(Reset.checarMouse())  Reset.cambiarEstado();
    else if(EjeX.checarMouse())  EjeX.cambiarEstado();

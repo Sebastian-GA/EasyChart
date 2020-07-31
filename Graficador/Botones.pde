@@ -2,14 +2,26 @@
 //----------------------GENERACIÖN DE LOS BOTONES----------------------//
 
 boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
-boton Reset, Puntos, Linea;
+boton Reset, Puntos, PuntosMas, PuntosMenos, Linea;
+boton Tema;
 boton EjeX, EjeY;
+int xBotones;
 
 void iniciarBotones(){
-  int xBotones = xGrafica + numBarras*dxBarras + 10;
-  Puntos = new boton(xBotones, height/2 - 120, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
+  xBotones = width - 90;
+  
+  Puntos = new boton(xBotones, height/2 - 160, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
+  PuntosMas = new boton(xBotones, height/2 - 120, 30, 30, color(192, 0, 116), "+");
+  PuntosMenos = new boton(xBotones + 30, height/2 - 120, 30, 30, color(192, 0, 116), "-");
+  PuntosMas.txtSize = 20;//Para que los signos se vean más grandes
+  PuntosMas.Color2 = color(0, 172, 232);  //Para que cuando se alcance el límite queden de un color distinto
+  PuntosMenos.txtSize = 20;
+  PuntosMenos.Color2 = color(0, 172, 232);
+  
   Linea = new boton(xBotones, height/2 - 80, 60, 30, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
   Reset = new boton(xBotones, height/2 - 40, 60, 30, color(245, 102, 0), "Reset");
+  
+  Tema = new boton(xBotones, height/2, 60, 30, color(192, 0, 116), color(0, 172, 232), "Tema1", "tema2");
   
   EjeY = new boton(xBotones, height/2 + 40, 60, 30, color(0, 157, 73), "EjeY");
   EjeX = new boton(xBotones, height/2 + 80, 60, 30, color(0, 157, 73), color(0, 157, 73), "Años", "Meses");
@@ -25,8 +37,10 @@ class boton{
   color Color2;  //Color del botón cuando está seleccionado
   boolean prsd = false;  //Presionado o no
   boolean mslc = false;  //Mouse sobre el botón o no
+  boolean valMax = false;
   String info1 = "Desactivado";
   String info2 = "Activado";
+  int txtSize = 13;
   
   //Cuando el botón cambia de color al presionarse
   boton(int _x, int _y, int _ancho, int _alto, color _Color1, color _Color2, String _info1, String _info2){
@@ -71,7 +85,7 @@ class boton{
     if(mslc)  strokeWeight(4);  //Si el mouse está sobre el botón
     else  strokeWeight(1);
     
-    if(prsd && cambiaColor){  //Si el botón cambia de color y está activado se dibuja de Color2
+    if((prsd && cambiaColor) || valMax){  //Si el botón cambia de color y está activado se dibuja de Color2
       stroke(Color2);
       fill(Color2);
     }else{
@@ -80,7 +94,7 @@ class boton{
     }
     rect(x, y, ancho, alto);
     fill(255);
-    textSize(13);
+    textSize(txtSize);
     textAlign(CENTER,CENTER);
     if(prsd && cambiaColor){
       text(info2, x + ancho/2, y + alto/2);
@@ -93,9 +107,17 @@ class boton{
 //----------------------DIBUJAR LOS BOTONES----------------------//
 
 void dibujarBotones(){
-  Reset.dibujar();
+  stroke(255);
+  strokeWeight(1);
+  noFill();
+  rect(Puntos.x -5, Puntos.y -5, Puntos.ancho +10, Linea.y + Linea.alto +10);
   Puntos.dibujar();
+  PuntosMas.dibujar();
+  PuntosMenos.dibujar();
   Linea.dibujar();
+  Reset.dibujar();
+  
+  Tema.dibujar();
   EjeY.dibujar();
   EjeX.dibujar();
 }
@@ -126,6 +148,21 @@ void accionBotones(){
       }
       endShape();
     }
+  }
+  
+  //----------------------CAMBIO DEL NUMERO DE BARRAS----------------------//
+  
+  if(PuntosMas.prsd){
+    if(numBarras == numMaxBarras)  PuntosMas.valMax = true;  //Si se alcanzo el valor máximo se pinta de otro color
+    else  cambiarNumBarras(true);
+    PuntosMenos.valMax = false;  //Si se el valor aumenta o se queda igual por tanto se "desactiva" el color2 de PuntosMenos
+    PuntosMas.prsd = false;
+  }
+  if(PuntosMenos.prsd){
+    if(numBarras == 1)  PuntosMenos.valMax = true;
+    else  cambiarNumBarras(false);
+    PuntosMas.valMax = false;
+    PuntosMenos.prsd = false;
   }
   
   //----------------------RESET----------------------//
