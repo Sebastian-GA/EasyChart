@@ -6,8 +6,8 @@ boton Reset, Linea;
 
 void iniciarBotones(){
   int xBotones = xGrafica + numBarras*30 + 10;  //30 separación de las barras
-  Reset = new boton(xBotones, height/2, 60, 30, color(250,255,0), "Reset");
-  Linea = new boton(xBotones, height/4, 60, 30, color(150,200,170), color(50,244,100), "Linea");
+  Reset = new boton(xBotones, height/2, 60, 30, color(245, 102, 0), "Reset");
+  Linea = new boton(xBotones, height/4, 60, 30, color(0, 157, 73), color(147, 195, 70), "Linea");
 }
 
 //----------------------CLASE----------------------//
@@ -72,7 +72,7 @@ class boton{
       fill(Color1);
     }
     rect(x, y, ancho, alto);
-    fill(0);
+    fill(255);
     textSize(13);
     textAlign(CENTER,CENTER);
     text(info, x + ancho/2, y + alto/2);
@@ -92,7 +92,7 @@ void accionBotones(){
     */
     //Curva
     noFill();
-    stroke(0);
+    stroke(255);
     beginShape();
     for(int b = 0; b < numBarras; b++){
       if(b == 0){  //Es necesario usar dos puntos para el inicio y el final, es decir deben de estar repetidos

@@ -28,9 +28,9 @@ void iniciarBarras(){
 //----------------------EJES----------------------//
 
 void dibujarEje(){
-  stroke(0);
+  stroke(255);
   strokeWeight(1);
-  fill(0);
+  fill(255);
   textSize(10);
   textAlign(RIGHT,CENTER);
   
@@ -51,7 +51,7 @@ class barra{
   int alto = altoMaxBarras/2;
   int num = 50;
   int ancho;
-  color Color1 = color(106,224,11);
+  color Color1 = color(147, 195, 70);
   
   barra(int _x, int _y, int _a){
     x = _x;
@@ -81,8 +81,8 @@ class barra{
     fill(Color1);
     rect(x, y, ancho, -alto);
     if(!Linea.prsd){  //Se muestra el número solo cuando no se muestra la linea
-      fill(0);
-      textSize(10);
+      fill(255);
+      textSize(12);
       textAlign(CENTER,CENTER);
       num = round(map(alto, 0, altoMaxBarras, 0, 100));
       text(num, x + ancho/2, y - alto - 10);

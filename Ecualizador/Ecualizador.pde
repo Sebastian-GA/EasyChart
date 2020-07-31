@@ -4,14 +4,24 @@
 
 */
 
+PFont Font;
+
 void setup(){
   size(600,300);
+  
+  Font = createFont("Bebas-Regular.ttf", 32);
+  textFont(Font);
+  
   iniciarBarras();
   iniciarBotones();
 }
 
 void draw(){
-  background(150);
+  background(0,0,41);
+  fill(255);
+  textAlign(CENTER,CENTER);
+  textSize(20);
+  text("ECUALIZADOR", width/2, height/12);
   
   //Dibujar Gráfica
   dibujarEje();
