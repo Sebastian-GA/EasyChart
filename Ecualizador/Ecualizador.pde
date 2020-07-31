@@ -5,7 +5,7 @@
 */
 
 void setup(){
-  size(700,300);
+  size(700,500);
   iniciarBarras();
   iniciarBotones();
 }
@@ -21,6 +21,7 @@ void draw(){
   //Dibujar Botones
   Reset.dibujar();
   Linea.dibujar();
+  accionBotones();
 }
 
 //----------------------CONTROL CLICK----------------------//

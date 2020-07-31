@@ -62,3 +62,21 @@ class boton{
     text(info, x + ancho/2, y + alto/2);
   }
 }
+
+//----------------------ACCIÓN DE LOS BOTONES----------------------//
+
+void accionBotones(){
+  if(Linea.prsd){  //Si el botón está activado
+    for(int b = 0; b < numBarras - 1; b++){
+      stroke(255);
+      strokeWeight(4);
+      line(Barras[b].x + Barras[b].ancho/2, Barras[b].y - Barras[b].alto, Barras[b+1].x + Barras[b].ancho/2, Barras[b+1].y - Barras[b+1].alto);  //Linea que une las barras 
+    }
+  }
+  if(Reset.prsd){
+    for(int b = 0; b < numBarras; b++){
+      Barras[b].reset();
+    }
+    Reset.prsd = false;
+  }
+}
