@@ -53,6 +53,7 @@ class boton{
         izqClick1 = false;
       }
     }else{
+      //izqClick1 = false;
       mslc = false;
     }
   }

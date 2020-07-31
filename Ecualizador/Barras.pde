@@ -25,6 +25,23 @@ void iniciarBarras(){
   }
 }
 
+//----------------------EJES----------------------//
+
+void dibujarEje(){
+  stroke(0);
+  strokeWeight(1);
+  line(xGrafica -10, yGrafica, xGrafica -10, yGrafica - altoMaxBarras);  //Linea del eje  
+  int divisiones = 4;  //Cantidad de divisiones del eje  (*Tiene que ser un número mayor que cero)
+  fill(0);
+  textSize(10);
+  textAlign(RIGHT,CENTER);
+  //Numeros del eje
+  for(int n = 0; n <= divisiones; n++){
+    line(xGrafica - 13, yGrafica - (n*altoMaxBarras/(divisiones)), xGrafica - 10, yGrafica - (n*altoMaxBarras/(divisiones))); 
+    text(round(map(n, 0,divisiones, 0, 100)), xGrafica -15, yGrafica - (n*altoMaxBarras/(divisiones)));  //Numeros del eje
+  }
+}
+
 //----------------------CLASE----------------------//
 class barra{
   int x, y;
