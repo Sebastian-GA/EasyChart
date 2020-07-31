@@ -5,7 +5,7 @@
 */
 
 void setup(){
-  size(700,300);
+  size(600,300);
   iniciarBarras();
   iniciarBotones();
 }

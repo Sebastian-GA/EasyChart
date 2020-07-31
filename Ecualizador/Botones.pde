@@ -5,9 +5,9 @@ boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
 boton Reset, Linea;
 
 void iniciarBotones(){
-  int xBotones = xGrafica + (numBarras + 1)*30;  //30 separación de las barras
-  Reset = new boton(xBotones, height/2, 80, 50, color(250,0,0), "RESET");
-  Linea = new boton(xBotones, height/4, 80, 50, color(150,200,30), color(50,244,100), "LINEA");
+  int xBotones = xGrafica + numBarras*30 + 10;  //30 separación de las barras
+  Reset = new boton(xBotones, height/2, 60, 30, color(250,255,0), "Reset");
+  Linea = new boton(xBotones, height/4, 60, 30, color(150,200,170), color(50,244,100), "Linea");
 }
 
 //----------------------CLASE----------------------//
@@ -73,7 +73,7 @@ class boton{
     }
     rect(x, y, ancho, alto);
     fill(0);
-    textSize(20);
+    textSize(13);
     textAlign(CENTER,CENTER);
     text(info, x + ancho/2, y + alto/2);
   }
@@ -83,11 +83,29 @@ class boton{
 
 void accionBotones(){
   if(Linea.prsd){  //Si el botón está activado
+    strokeWeight(2);
+    /*Lineas Rectas
+    stroke(255);
     for(int b = 0; b < numBarras - 1; b++){
-      stroke(255);
-      strokeWeight(4);
       line(Barras[b].x + Barras[b].ancho/2, Barras[b].y - Barras[b].alto, Barras[b+1].x + Barras[b].ancho/2, Barras[b+1].y - Barras[b+1].alto);  //Linea que une las barras 
     }
+    */
+    //Curva
+    noFill();
+    stroke(0);
+    beginShape();
+    for(int b = 0; b < numBarras; b++){
+      if(b == 0){  //Es necesario usar dos puntos para el inicio y el final, es decir deben de estar repetidos
+        curveVertex(Barras[b].x , Barras[b].y - Barras[b].alto);
+        curveVertex(Barras[b].x , Barras[b].y - Barras[b].alto);
+      }else if(b == numBarras - 1){
+        curveVertex(Barras[b].x + Barras[b].ancho, Barras[b].y - Barras[b].alto);
+        curveVertex(Barras[b].x + Barras[b].ancho, Barras[b].y - Barras[b].alto);
+      }else{
+        curveVertex(Barras[b].x + Barras[b].ancho/2, Barras[b].y - Barras[b].alto);
+      }
+    }
+    endShape();
   }
   if(Reset.prsd){
     for(int b = 0; b < numBarras; b++){

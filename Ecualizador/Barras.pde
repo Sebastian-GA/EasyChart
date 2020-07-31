@@ -30,15 +30,18 @@ void iniciarBarras(){
 void dibujarEje(){
   stroke(0);
   strokeWeight(1);
-  line(xGrafica -10, yGrafica, xGrafica -10, yGrafica - altoMaxBarras);  //Linea del eje  
-  int divisiones = 4;  //Cantidad de divisiones del eje  (*Tiene que ser un número mayor que cero)
   fill(0);
   textSize(10);
   textAlign(RIGHT,CENTER);
+  
+  //Eje
+  line(xGrafica -10, yGrafica, xGrafica -10, yGrafica - altoMaxBarras);  //Linea del eje  
+  int divisiones = 4;  //Cantidad de divisiones del eje  (*Tiene que ser un número mayor que cero)
+  
   //Numeros del eje
   for(int n = 0; n <= divisiones; n++){
     line(xGrafica - 13, yGrafica - (n*altoMaxBarras/(divisiones)), xGrafica - 10, yGrafica - (n*altoMaxBarras/(divisiones))); 
-    text(round(map(n, 0,divisiones, 0, 100)), xGrafica -15, yGrafica - (n*altoMaxBarras/(divisiones)));  //Numeros del eje
+    text(round(map(n, 0,divisiones, 0, 100)), xGrafica -15, yGrafica - (n*altoMaxBarras/(divisiones)));
   }
 }
 
@@ -48,7 +51,7 @@ class barra{
   int alto = altoMaxBarras/2;
   int num = 50;
   int ancho;
-  color bColor = color(106,224,11);
+  color Color1 = color(106,224,11);
   
   barra(int _x, int _y, int _a){
     x = _x;
@@ -57,7 +60,7 @@ class barra{
   }
   
   boolean checarMouse(){
-    if(mouseX > x  && mouseX < x + ancho && mouseY > y - alto - 20 && mouseY < y){  //Si el puntero está sobre la barra
+    if(mouseX > x  && mouseX < x + ancho && mouseY > y - altoMaxBarras - 20 && mouseY < y){  //Si el puntero está sobre la barra
       if(mousePressed && mouseButton == LEFT){
         return true;
       }
@@ -68,7 +71,6 @@ class barra{
   void cambiarAltura(){
     alto = y-mouseY;
     alto = constrain(alto, 0, altoMaxBarras);
-    
   }
   
   void dibujar(){
@@ -76,7 +78,7 @@ class barra{
       cambiarAltura();
     }
     noStroke();
-    fill(bColor);
+    fill(Color1);
     rect(x, y, ancho, -alto);
     if(!Linea.prsd){  //Se muestra el número solo cuando no se muestra la linea
       fill(0);
