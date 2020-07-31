@@ -3,12 +3,16 @@
 
 boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
 boton Reset, Puntos, Linea;
+boton EjeX, EjeY;
 
 void iniciarBotones(){
   int xBotones = xGrafica + numBarras*dxBarras + 10;
-  Puntos = new boton(xBotones, height/2 - 40, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
-  Linea = new boton(xBotones, height/2, 60, 30, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
-  Reset = new boton(xBotones, height/2 + 40, 60, 30, color(245, 102, 0), "Reset");
+  Puntos = new boton(xBotones, height/2 - 120, 60, 30, color(0, 157, 73), color(147, 195, 70), "Puntos", "Barras");
+  Linea = new boton(xBotones, height/2 - 80, 60, 30, color(192, 0, 116), color(0, 172, 232), "Curva", "Recta");
+  Reset = new boton(xBotones, height/2 - 40, 60, 30, color(245, 102, 0), "Reset");
+  
+  EjeY = new boton(xBotones, height/2 + 40, 60, 30, color(0, 157, 73), "EjeY");
+  EjeX = new boton(xBotones, height/2 + 80, 60, 30, color(0, 157, 73), color(0, 157, 73), "Años", "Meses");
 }
 
 //----------------------CLASE----------------------//
@@ -47,17 +51,18 @@ class boton{
     info1 = _info1;
   }
   
-  void checarMouse(){
+  boolean checarMouse(){
     if(mouseX > x && mouseX < x + ancho && mouseY > y && mouseY < y + alto){  //Si el puntero está sobre el botón
       mslc = true;
-      if(izqClick1){
-        prsd = !prsd;
-        izqClick1 = false;
-      }
+      return true;
     }else{
-      //izqClick1 = false;
       mslc = false;
+      return false;
     }
+  }
+  
+  void cambiarEstado(){
+    prsd = !prsd;
   }
   
   void dibujar(){
@@ -91,11 +96,16 @@ void dibujarBotones(){
   Reset.dibujar();
   Puntos.dibujar();
   Linea.dibujar();
+  EjeY.dibujar();
+  EjeX.dibujar();
 }
 
 //----------------------ACCIÓN DE LOS BOTONES----------------------//
 
 void accionBotones(){
+  
+  //----------------------PUNTOS-BARRAS----------------------//
+  
   if(Puntos.prsd){  //Si el botón está activado
     strokeWeight(2);
     //Lineas Rectas
@@ -117,10 +127,43 @@ void accionBotones(){
       endShape();
     }
   }
+  
+  //----------------------RESET----------------------//
+  
   if(Reset.prsd){
     for(int b = 0; b < numBarras; b++){
       Barras[b].reset();
     }
     Reset.prsd = false;
   }
+  
+  //----------------------AÑOS-MESES----------------------//
+  
+  if(EjeX.prsd){  //Años
+    for(int b = 0; b < numBarras; b++){
+      text(year() - b, Barras[numBarras - b -1].x + Barras[numBarras - b -1].ancho/2, yGrafica + 10);  //La última barra es la del presente año y las anteriores son las de los años anteriores
+    }
+    Titulo = "Ingresos Anuales";
+  }if(!EjeX.prsd){  //Meses
+    String [] meses = {"EN", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGTO", "SEPT", "OCT", "NOV", "DIC"};
+    int mes = month();
+    for(int b = 0; b < numBarras; b++){
+      mes--;
+      if(mes < 0)  mes = 11;
+      text(meses[mes], Barras[numBarras - b -1].x + Barras[numBarras - b -1].ancho/2, yGrafica + 10);  //La ultima barra es la del mes actual
+    }
+    Titulo = "Ingresos Mensuales";
+  }
+  
+  //----------------------EJE Y----------------------//
+  
+  if(EjeY.prsd){
+    if(yMax == 100)  yMax = 500;
+    else if(yMax == 10000) yMax = 100;
+    else  yMax += 1000;
+    yMax = constrain(yMax, 0, 10000);
+    
+    EjeY.prsd = false;
+  }
+  
 }
