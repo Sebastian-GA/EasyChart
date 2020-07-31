@@ -61,11 +61,13 @@ class barra{
     noStroke();
     fill(bColor);
     rect(x, y, ancho, -alto);
-    fill(0);
-    textSize(10);
-    textAlign(CENTER,CENTER);
-    num = round(map(alto, 0, altoMaxBarras, 0, 100));
-    text(num, x + ancho/2, y - alto);
+    if(!Linea.prsd){  //Se muestra el número solo cuando no se muestra la linea
+      fill(0);
+      textSize(10);
+      textAlign(CENTER,CENTER);
+      num = round(map(alto, 0, altoMaxBarras, 0, 100));
+      text(num, x + ancho/2, y - alto - 10);
+    }
   }
   
   void reset(){
