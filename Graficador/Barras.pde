@@ -12,14 +12,14 @@ int yMax = 100;  //Valor máximo del eje Y
 
 int altoMaxBarras;
 int dxBarras = 30;  //Separación entre barras
-int anchoBarras = 21;  //Ancho de las barras
+int anchoBarras = 20;  //Ancho de las barras
 
 void iniciarBarras(){
   xGrafica = width/12;
   yGrafica = height - height/10;
   altoMaxBarras = yGrafica - height/5;
   
-  dxBarras = (xBotones - xGrafica)/numBarras;  //*Importante que numBarras no sea cero
+  dxBarras = (xBotones - xGrafica -30)/numBarras;  //*Importante que numBarras no sea cero
   anchoBarras = dxBarras - 10;
   
   int _x;  //Posición inferior izquierda de la barra
@@ -38,7 +38,7 @@ void cambiarNumBarras(boolean _mas){
   else numBarras--;
   numBarras = constrain(numBarras, 1, 20);
   
-  dxBarras = (xBotones - xGrafica)/numBarras;  //*Importante que numBarras no sea cero
+  dxBarras = (xBotones - xGrafica -30)/numBarras;  //*Importante que numBarras no sea cero
   anchoBarras = dxBarras - 10;
   
   int _x;  //Posición inferior izquierda de la barra
@@ -56,6 +56,7 @@ void dibujarEje(){
   stroke(255);
   strokeWeight(1);
   fill(255);
+  textFont(Font1);
   textSize(12);
   textAlign(RIGHT,CENTER);
   
@@ -68,6 +69,7 @@ void dibujarEje(){
   //Numeros del eje
   for(int n = 0; n <= divisiones; n++){
     line(xGrafica - 13, yGrafica - (n*altoMaxBarras/(divisiones)), xGrafica - 10, yGrafica - (n*altoMaxBarras/(divisiones))); 
+    textFont(Font1);
     text(round(map(n, 0,divisiones, 0, yMax)), xGrafica -15, yGrafica - (n*altoMaxBarras/(divisiones)));
   }
 }
@@ -109,6 +111,7 @@ class barra{
     if(!Puntos.prsd){  //Se muestra el número solo cuando no se muestra la linea
       rect(x, y, ancho, -alto);
       fill(255);
+      textFont(Font1);
       textSize(12);
       textAlign(CENTER,CENTER);
       num = round(map(alto, 0, altoMaxBarras, 0, yMax));
