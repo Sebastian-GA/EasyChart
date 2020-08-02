@@ -7,11 +7,14 @@ EasyChart te permite hacer gráficos de barras o de líneas de la manera más f�
 ## Características :heavy_check_mark:
 
 * Fácil de usar.
+* Diseño agradeble.
+* Enfocada para temas financieros.
 * Variedad de temas para escoger.
+* Permite exportar la gráfica a imagen.
 
 ## Autor
 
-    Sebatián García Angarita - Estudiante Universidad Industrial de Santander
+    Sebatián García Angarita - Estudiante de la Universidad Industrial de Santander
 
 ## Instalación :link:
 
@@ -20,7 +23,7 @@ Descarga la carpeta "EasyChart" y ejecuta el código :smiley:. Es necesario inta
 ## Uso
 
 * **Puntos - Barras**: Cambiar entre gráfico de barras y gráfico de lineas.
-* **+ -**: Añadir o eliminar barras  o puntos.
+* **(+) - (-)**: Añadir o eliminar barras  o puntos.
 * **Curva - Recta**: Cuando se está en el modo "Puntos" permite cambiar la forma en que se unen los puntos, unir los puntos por rectas o por una curva.
 * **Reset**: Establece la altura de las barras en la mitad.
 * **Costos - Gastos - Ingresos**: Cambia el título de la gráfica entre las opciónes.
@@ -33,4 +36,5 @@ Descarga la carpeta "EasyChart" y ejecuta el código :smiley:. Es necesario inta
 ## Capturas de Pantalla
 <p align= "center">
 	<img src="https://github.com/Computer-Programming-I-UIS/parcial-2-Sebastian-GA/blob/master/InterfaceScreenshot1.png">
+    <img src="https://github.com/Computer-Programming-I-UIS/parcial-2-Sebastian-GA/blob/master/InterfaceScreenshot2.png">
 </p>
