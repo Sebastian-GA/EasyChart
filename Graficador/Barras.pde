@@ -53,9 +53,9 @@ void cambiarNumBarras(boolean _mas){
 //----------------------EJES----------------------//
 
 void dibujarEje(){
-  stroke(255);
+  stroke(Temas[temaSlct][5]);
   strokeWeight(1);
-  fill(255);
+  fill(Temas[temaSlct][5]);
   textFont(Font1);
   textSize(12);
   textAlign(RIGHT,CENTER);
@@ -80,7 +80,7 @@ class barra{
   int alto = altoMaxBarras/2;
   int num = 50;
   int ancho;
-  color Color1 = color(147, 195, 70);
+  int Color1 = 1;
   
   barra(int _x, int _y, int _a){
     x = _x;
@@ -98,6 +98,7 @@ class barra{
   }
   
   void cambiarAltura(){
+    cursor(MOVE);
     alto = y-mouseY;
     alto = constrain(alto, 0, altoMaxBarras);
   }
@@ -107,10 +108,10 @@ class barra{
       cambiarAltura();
     }
     noStroke();
-    fill(Color1);
-    if(!Puntos.prsd){  //Se muestra el número solo cuando no se muestra la linea
+    fill(Temas[temaSlct][Color1]);
+    if(!Botones[0].prsd){  //Se muestra el número solo cuando no se muestra la linea
       rect(x, y, ancho, -alto);
-      fill(255);
+      fill(Temas[temaSlct][5]);
       textFont(Font1);
       textSize(12);
       textAlign(CENTER,CENTER);

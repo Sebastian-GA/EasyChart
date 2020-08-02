@@ -9,7 +9,17 @@ String Titulo2 = "Anuales";
 
 PFont Font1;
 PFont Font2;
-int numImagen = 1;
+int numImagen = 1;  //Tema que se muestra
+
+int temaSlct = 0;
+                   //      Background          Barras             Boton1             Boton2               Boton3         Texto1(General)          Texto2(Botones)
+color [][] Temas = {{color(0, 0, 041), color(147, 195, 70), color(0, 157, 73), color(192, 0, 116), color(245, 102, 0), color(255, 255, 255), color(255, 255, 255)},
+                    {color(255, 255, 255), color(40, 49, 073), color(0, 129, 138), color(0, 129, 138), color(40, 49, 073), color(40, 49, 73), color(255, 255, 255)},
+                    {color(255, 255, 255), color(78, 240, 055), color(0, 183, 194), color(18, 132, 148), color(18, 132, 148), color(0, 0, 0), color(255, 255, 255)},
+                    {color(244, 244, 244), color(240, 165, 0), color(207, 117, 0), color(240, 165, 0), color(0, 0, 0), color(0, 0, 0), color(255, 255, 255)},
+                    {color(7, 3, 26), color(251, 212, 109), color(251, 212, 109), color(79, 138, 139), color(7, 3, 26), color(255, 255, 255), color(255, 255, 255)},
+                    {color(255, 255, 255), color(232, 74, 95), color(232, 74, 95), color(254, 206, 171), color(232, 74, 95), color(0, 0, 0), color(255, 255, 255)}};
+
 
 void setup(){
   size(760,400);
@@ -23,8 +33,8 @@ void setup(){
 }
 
 void draw(){
-  background(0,0,41);
-  fill(255);
+  background(Temas[temaSlct][0]);
+  fill(Temas[temaSlct][5]);
   textAlign(CENTER,CENTER);
   textFont(Font1);
   textSize(20);
@@ -42,7 +52,7 @@ void draw(){
   accionBotones();
   
   textFont(Font2);
-  fill(255);
+  fill(Temas[temaSlct][5]);
   textAlign(CENTER,CENTER);
   text("by Sebastián", xBotones + anchoBotones/2, height-25);
 }
@@ -52,26 +62,21 @@ void draw(){
 
 void mousePressed(){
  if(mouseButton == LEFT){
-   if(Puntos.checarMouse())  Puntos.cambiarEstado();
-   else if(PuntosMas.checarMouse())  PuntosMas.cambiarEstado();
-   else if(PuntosMenos.checarMouse())  PuntosMenos.cambiarEstado();
-   else if(Linea.checarMouse())  Linea.cambiarEstado();
-   else if(Reset.checarMouse())  Reset.cambiarEstado();
-   else if(Tipo.checarMouse())  Tipo.cambiarEstado();
-   else if(EjeX.checarMouse())  EjeX.cambiarEstado();
-   else if(EjeY.checarMouse())  EjeY.cambiarEstado();
-   else if(Export.checarMouse())  Export.cambiarEstado();
+   for(int b = 0; b < numBotones; b++){
+     if(Botones[b].checarMouse()){
+       Botones[b].cambiarEstado();
+       break;
+     }
+   }
  }
 }
+
 void mouseMoved(){
- if(Puntos.checarMouse())  cursor(HAND);
- else if(PuntosMas.checarMouse())  cursor(HAND);
- else if(PuntosMenos.checarMouse())  cursor(HAND);
- else if(Linea.checarMouse())  cursor(HAND);
- else if(Reset.checarMouse())  cursor(HAND);
- else if(Tipo.checarMouse())  cursor(HAND);
- else if(EjeX.checarMouse())  cursor(HAND);
- else if(EjeY.checarMouse())  cursor(HAND);
- else if(Export.checarMouse())  cursor(HAND);
- else  cursor(ARROW);
+  for(int b = 0; b < numBotones; b++){
+   if(Botones[b].checarMouse()){
+     cursor(HAND);
+     break;
+   }
+   cursor(ARROW);
+  }
 }

@@ -1,10 +1,8 @@
 
 //----------------------GENERACIÖN DE LOS BOTONES----------------------//
 
-boton [] BotonesB = new boton[numBarras];  //Botones de cada barra
-boton Reset, Puntos, PuntosMas, PuntosMenos, Linea;
-boton Tipo, EjeX, EjeY;
-boton Export;
+int numBotones = 10;
+boton [] Botones = new boton[numBotones];
 
 int xBotones;
 int dyBotones = 42;  //Separacion en Y de los botones
@@ -14,61 +12,57 @@ int altoBotones = 30;
 void iniciarBotones(){
   xBotones = width - 90;
   
-  Puntos = new boton(xBotones, height/2 - 4*dyBotones, anchoBotones, altoBotones, 2, color(0, 157, 73));
-  Puntos.cambiarTxt(0, "Puntos");
-  Puntos.cambiarTxt(1, "Barras");
+  //Puntos - Barras
+  Botones[0] = new boton(xBotones, height/2 - 4*dyBotones, anchoBotones, altoBotones, 2, 2);
+  Botones[0].cambiarTxt(0, "Puntos");
+  Botones[0].cambiarTxt(1, "Barras");
   
-  PuntosMas = new boton(xBotones, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, color(192, 0, 116), "+");
-  PuntosMenos = new boton(xBotones + 30, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, color(192, 0, 116), "-");
-  PuntosMas.txtSize = 20;//Para que los signos se vean más grandes
-  PuntosMenos.txtSize = 20;
+  //Más o menos puntos-barras
+  Botones[1] = new boton(xBotones, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, 3, "+");
+  Botones[2] = new boton(xBotones + 30, height/2 - 3*dyBotones, anchoBotones/2, altoBotones, 3, "-");
+  Botones[1].txtSize = 20;//Para que los signos se vean más grandes
+  Botones[2].txtSize = 20;
   
-  Linea = new boton(xBotones, height/2 - 2*dyBotones, anchoBotones, altoBotones, 2, color(192, 0, 116));
-  Linea.cambiarTxt(0, "Curva");
-  Linea.cambiarTxt(1, "Recta");
+  //Curva - Recta
+  Botones[3] = new boton(xBotones, height/2 - 2*dyBotones, anchoBotones, altoBotones, 2, 3);
+  Botones[3].cambiarTxt(0, "Curva");
+  Botones[3].cambiarTxt(1, "Recta");
   
-  Reset = new boton(xBotones, height/2 - dyBotones, anchoBotones, altoBotones, color(245, 102, 0), "Reset");
+  //Reset
+  Botones[4] = new boton(xBotones, height/2 - dyBotones, anchoBotones, altoBotones, 4, "Reset");
   
-  Tipo = new boton(xBotones, height/2, anchoBotones, altoBotones, 3, color(0, 157, 73));
-  Tipo.cambiarTxt(0, "Costos");
-  Tipo.cambiarTxt(1, "Gastos");
-  Tipo.cambiarTxt(2, "Ingresos");
+  //Titulo
+  Botones[5] = new boton(xBotones, height/2, anchoBotones, altoBotones, 3, 2);
+  Botones[5].cambiarTxt(0, "Costos");
+  Botones[5].cambiarTxt(1, "Gastos");
+  Botones[5].cambiarTxt(2, "Ingresos");
   
-  EjeY = new boton(xBotones, height/2 + dyBotones, anchoBotones, altoBotones, color(0, 157, 73), "Valor Max");
+  //EjeY
+  Botones[6] = new boton(xBotones, height/2 + dyBotones, anchoBotones, altoBotones, 2, "Valor Max");
+  //EjeX
+  Botones[7] = new boton(xBotones, height/2 + 2*dyBotones, anchoBotones, altoBotones, 2, 2);
+  Botones[7].cambiarTxt(0, "Años");
+  Botones[7].cambiarTxt(1, "Meses");
   
-  EjeX = new boton(xBotones, height/2 + 2*dyBotones, anchoBotones, altoBotones, 2, color(0, 157, 73));
-  EjeX.cambiarTxt(0, "Años");
-  EjeX.cambiarTxt(1, "Meses");
+  //Exportar gráfica
+  Botones[8] = new boton(xBotones, height/2 + 3*dyBotones, anchoBotones, altoBotones, 4, "Exportar");
   
-  Export = new boton(xBotones, height/2 + 3*dyBotones, anchoBotones, altoBotones, color(245, 102, 0), "Exportar");
+  //Cambiar de Tema  //No se muestra (Esta sobre la firma)
+  Botones[9] = new boton(xBotones - 10, height/2 + 4*dyBotones, anchoBotones + 20, 20, 4, "Tema");
 }
 
 //----------------------DIBUJAR LOS BOTONES----------------------//
 
 void dibujarBotones(){
-  stroke(255);
+  stroke(Temas[temaSlct][5]);
   strokeWeight(1);
   noFill();
-  rect(xBotones -4, Puntos.y -4, anchoBotones +8, 3*dyBotones + altoBotones +8);  //Rectángulo que encierra la categoría del control de los puntos, barras, linea...
-  Puntos.dibujar();
-  PuntosMas.dibujar();
-  PuntosMenos.dibujar();
-  Linea.dibujar();
-  Reset.dibujar();
-  
-  stroke(255);
-  strokeWeight(1);
-  noFill();
-  rect(xBotones -4, Tipo.y -4, anchoBotones +8, 2*dyBotones + altoBotones + 8);
-  Tipo.dibujar();
-  EjeY.dibujar();
-  EjeX.dibujar();
-  
-  stroke(255);
-  strokeWeight(1);
-  noFill();
-  rect(xBotones -4, Export.y -4, anchoBotones +8, altoBotones + 8);  //Rectángulo que encierra la categoría del control de los puntos, barras, linea...
-  Export.dibujar();
+  rect(xBotones -4, Botones[0].y -4, anchoBotones +8, 3*dyBotones + altoBotones +8);  //Rectángulo que encierra la categoría del control de los puntos, barras, linea...
+  rect(xBotones -4, Botones[5].y -4, anchoBotones +8, 2*dyBotones + altoBotones + 8);  //Rectangulo para segunda categoría...
+  rect(xBotones -4, Botones[8].y -4, anchoBotones +8, altoBotones + 8);
+  for(int b = 0; b < numBotones; b++){
+    if(b != 9)  Botones[b].dibujar();  //No dibuja el boton del tema
+  }
 }
 
 //----------------------CLASE----------------------//
@@ -76,7 +70,7 @@ void dibujarBotones(){
 class boton{
   int x, y;
   int alto, ancho;
-  color Color1;  //Color del botón
+  int Color1;  //Color del botón (depende del tema)
   boolean prsd = false;  //Presionado o no
   boolean mslc = false;  //Mouse sobre el botón o no
   
@@ -86,7 +80,7 @@ class boton{
   int txtSize = 13;
   
   //Cuando el botón cambia de color al presionarse y tiene varias opciones
-  boton(int _x, int _y, int _ancho, int _alto, int _numEstados, color _Color1){
+  boton(int _x, int _y, int _ancho, int _alto, int _numEstados, int _Color1){
     x = _x;
     y = _y;
     ancho = _ancho;
@@ -98,7 +92,7 @@ class boton{
     Color1 = _Color1;
   }
   //Cuando el botón no cambia de color y solo realiza una cosa
-  boton(int _x, int _y, int _ancho, int _alto, color _Color1, String _info1){
+  boton(int _x, int _y, int _ancho, int _alto, int _Color1, String _info1){
     x = _x;
     y = _y;
     ancho = _ancho;
@@ -138,10 +132,10 @@ class boton{
     if(mslc)  strokeWeight(4);  //Si el mouse está sobre el botón y no esta el valor máximo
     else  strokeWeight(1);
     
-    stroke(Color1);
-    fill(Color1);
+    stroke(Temas[temaSlct][Color1]);
+    fill(Temas[temaSlct][Color1]);
     rect(x, y, ancho, alto);  //Dibuja el botón
-    fill(255);
+    fill(Temas[temaSlct][6]);
     textFont(Font1);
     textSize(txtSize);
     textAlign(CENTER,CENTER);
@@ -157,17 +151,17 @@ void accionBotones(){
   
   //----------------------PUNTOS-BARRAS----------------------//
   
-  if(Puntos.prsd){  //Si el botón está activado
+  if(Botones[0].prsd){  //Si el botón está activado
     strokeWeight(2);
     //Lineas Rectas
-    if(!Linea.prsd){  //Si está seleccionado dibujar rectas  (No está activado)
-      stroke(255);
+    if(!Botones[2].prsd){  //Si está seleccionado dibujar rectas  (No está activado)
+      stroke(Temas[temaSlct][5]);
       for(int b = 0; b < numBarras - 1; b++){
         line(Barras[b].x + Barras[b].ancho/2, Barras[b].y - Barras[b].alto, Barras[b+1].x + Barras[b].ancho/2, Barras[b+1].y - Barras[b+1].alto);  //Linea que une las barras 
       }
     }else{  //Curva  (Está activado el botón)
       noFill();
-      stroke(255);
+      stroke(Temas[temaSlct][5]);
       beginShape();
       for(int b = 0; b < numBarras; b++){
         if(b == 0 || b == numBarras - 1){  //Es necesario usar dos puntos para el inicio y el final, es decir deben de estar repetidos
@@ -181,57 +175,59 @@ void accionBotones(){
   
   //----------------------CAMBIO DEL NUMERO DE BARRAS----------------------//
   
-  if(PuntosMas.prsd){
+  if(Botones[1].prsd){
     if(numBarras != numMaxBarras)  cambiarNumBarras(true);
-    PuntosMas.prsd = false;
+    Botones[1].prsd = false;
   }
-  if(PuntosMenos.prsd){
+  if(Botones[2].prsd){
     if(numBarras != 1)  cambiarNumBarras(false);
-    PuntosMenos.prsd = false;
+    Botones[2].prsd = false;
   }
   
   //----------------------RESET----------------------//
   
-  if(Reset.prsd){
+  if(Botones[4].prsd){
     for(int b = 0; b < numBarras; b++){
       Barras[b].reset();
     }
-    Reset.prsd = false;
+    Botones[4].prsd = false;
   }
   
   //----------------------TIPO----------------------//
   
-  if(Tipo.prsd){
+  if(Botones[5].prsd){
     int estadoAnterior;
-    estadoAnterior = Tipo.estado -1;
-    if(estadoAnterior < 0)  estadoAnterior = Tipo.numEstados -1;
-    Titulo1 = Tipo.info[estadoAnterior];
-    Tipo.prsd = false;
+    estadoAnterior = Botones[5].estado -1;
+    if(estadoAnterior < 0)  estadoAnterior = Botones[5].numEstados -1;
+    Titulo1 = Botones[5].info[estadoAnterior];
+    Botones[5].prsd = false;
   }
   
   //----------------------EJE Y----------------------//
   
-  if(EjeY.prsd){
+  if(Botones[6].prsd){
     if(yMax == 100)  yMax = 500;
     else if(yMax == 1000) yMax = 100;
     else  yMax += 1000;
     yMax = constrain(yMax, 0, 1000);
     
-    EjeY.prsd = false;
+    Botones[6].prsd = false;
   }
   
   //----------------------AÑOS-MESES----------------------//
   
-  if(EjeX.prsd){  //Años
+  if(Botones[7].prsd){  //Años
+    textFont(Font1);
+    fill(Temas[temaSlct][5]);
     for(int b = 0; b < numBarras; b++){
-      textFont(Font1);
       text(year() - b, Barras[numBarras - b -1].x + Barras[numBarras - b -1].ancho/2, yGrafica + 10);  //La última barra es la del presente año y las anteriores son las de los años anteriores
     }
     Titulo2 = "Anuales";
-  }if(!EjeX.prsd){  //Meses
+  }if(!Botones[7].prsd){  //Meses
     String [] meses = {"EN", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGTO", "SEPT", "OCT", "NOV", "DIC"};
     int mes = month();
     textFont(Font1);
+    fill(Temas[temaSlct][5]);
     for(int b = 0; b < numBarras; b++){
       mes--;
       if(mes < 0)  mes = 11;
@@ -242,12 +238,19 @@ void accionBotones(){
   
   //----------------------EXPORTAR GRÁFICA----------------------//
   
-  if(Export.prsd){
-    
-    PImage Graph = get(xGrafica - 50, 0, xBotones - 30, height);
-    Graph.save(Titulo1+"_"+Titulo2+numImagen+".png");
+  if(Botones[8].prsd){
+    PImage Chart = get(xGrafica - 50, 0, xBotones - 30, height);  //Solo exporta la gráfica
+    Chart.save("charts/"+Titulo1+"_"+Titulo2+numImagen+".png");  //La almacena en la carpeta "charts"
     numImagen++;
+    Botones[8].prsd = false;
+  }
+  
+  //----------------------TEMAS DE COLORES----------------------//
+  
+  if(Botones[9].prsd){
+    temaSlct++;
+    if(temaSlct >= Temas.length)  temaSlct = 0;
     
-    Export.prsd = false;
+    Botones[9].prsd = false;
   }
 }
