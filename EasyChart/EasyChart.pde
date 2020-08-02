@@ -4,7 +4,12 @@
 Autor: Sebastián García Angarita
 Fecha: 02/Agosto/2020
 
-...
+Descripción: Este proyecto fue realizado como 2do Parcial de la materia Programación de Computadores I.
+             
+             EasyChart es un programa que permite hacer gráficos de barras o de puntos de una forma
+             sencilla. Cuenta con una interfaz gráfica que muestra la gráfica junto con una serie
+             de botones que permite modificar parámetros de la gráfica como la cantidad de barras,
+             título, colores y exportarla como una imagen.
 
 */
 
