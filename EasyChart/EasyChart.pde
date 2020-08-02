@@ -28,7 +28,7 @@ color [][] Temas = {{color(0, 0, 041), color(147, 195, 70), color(0, 157, 73), c
 
 void setup(){
   size(760,400);
-  surface.setTitle("Graficador");  //Nombre de la ventana
+  surface.setTitle("EasyChart");  //Nombre de la ventana
   
   Font1 = createFont("BebasNeue-Regular.ttf", 13);
   Font2 = createFont("BillionDreams.ttf", 18);
