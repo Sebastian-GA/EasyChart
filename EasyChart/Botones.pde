@@ -154,7 +154,7 @@ void accionBotones(){
   if(Botones[0].prsd){  //Si el botón está activado
     strokeWeight(2);
     //Lineas Rectas
-    if(!Botones[2].prsd){  //Si está seleccionado dibujar rectas  (No está activado)
+    if(!Botones[3].prsd){  //Si está seleccionado dibujar rectas  (No está activado)
       stroke(Temas[temaSlct][5]);
       for(int b = 0; b < numBarras - 1; b++){
         line(Barras[b].x + Barras[b].ancho/2, Barras[b].y - Barras[b].alto, Barras[b+1].x + Barras[b].ancho/2, Barras[b+1].y - Barras[b+1].alto);  //Linea que une las barras 

@@ -1,6 +1,10 @@
 /*
+------------------------EasyChart------------------------
 
+Autor: Sebastián García Angarita
+Fecha: 02/Agosto/2020
 
+...
 
 */
 
@@ -18,7 +22,8 @@ color [][] Temas = {{color(0, 0, 041), color(147, 195, 70), color(0, 157, 73), c
                     {color(255, 255, 255), color(78, 240, 055), color(0, 183, 194), color(18, 132, 148), color(18, 132, 148), color(0, 0, 0), color(255, 255, 255)},
                     {color(244, 244, 244), color(240, 165, 0), color(207, 117, 0), color(240, 165, 0), color(0, 0, 0), color(0, 0, 0), color(255, 255, 255)},
                     {color(7, 3, 26), color(251, 212, 109), color(251, 212, 109), color(79, 138, 139), color(7, 3, 26), color(255, 255, 255), color(255, 255, 255)},
-                    {color(255, 255, 255), color(232, 74, 95), color(232, 74, 95), color(254, 206, 171), color(232, 74, 95), color(0, 0, 0), color(255, 255, 255)}};
+                    {color(255, 255, 255), color(232, 74, 95), color(232, 74, 95), color(254, 206, 171), color(232, 74, 95), color(0, 0, 0), color(255, 255, 255)},
+                    {color(235, 232, 190), color(52, 122, 42), color(32, 46, 36), color(179, 200, 122), color(32, 46, 36), color(32, 46, 36), color(255, 255, 255)}};
 
 
 void setup(){
