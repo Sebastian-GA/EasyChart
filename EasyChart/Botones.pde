@@ -187,7 +187,7 @@ void accionBotones(){
   //----------------------RESET----------------------//
   
   if(Botones[4].prsd){
-    for(int b = 0; b < numBarras; b++){
+    for(int b = 0; b < numMaxBarras; b++){
       Barras[b].reset();
     }
     Botones[4].prsd = false;
